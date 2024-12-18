@@ -26,10 +26,10 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 const db = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "abc123",
-	database: "student",
+	host: "byqybtse6xsiseomuimw-mysql.services.clever-cloud.com",
+	user: "uc00kwucue7cp4al",
+	password: "liZB4y7HqIPy1aw0yGy1",
+	database: "byqybtse6xsiseomuimw",
 })
 
 db.connect((err)=>{
