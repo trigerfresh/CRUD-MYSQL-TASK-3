@@ -5,18 +5,19 @@ const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
 
-console.log(process.env)
-let baseUrl = 'http://localhost:5000'
+// console.log(process.env)
+// let baseUrl = 'http://localhost:5000'
 
-if (process.env.NODE_ENV == 'prod') {
-  baseUrl = 'http://crud-mysql-task-3-3.onrender.com'
-}
+// if (process.env.NODE_ENV == 'prod') {
+ let baseUrl = 'http://crud-mysql-task-3-3.onrender.com'
+// }
 
 const app = express()
 const port = 5000
 
 app.use(cors())
 app.use(express.json())
+
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
@@ -46,7 +47,7 @@ db.connect((err) => {
   }
 })
 
-app.post('/students', upload.single('img'), (req, res) => {
+app.post(baseUrl + '/students', upload.single('img'), (req, res) => {
   const { r_no, name, marks } = req.body
   const img = req.file ? req.file.path : null
 
@@ -63,7 +64,7 @@ app.post('/students', upload.single('img'), (req, res) => {
   })
 })
 
-app.get('/show', (req, res) => {
+app.get(baseUrl + '/show', (req, res) => {
   // Query to fetch all students from the database
   db.query('SELECT * FROM students', (err, result) => {
     if (err) {
@@ -75,7 +76,7 @@ app.get('/show', (req, res) => {
   })
 })
 
-app.delete('/delete/:r_no', (req, res) => {
+app.delete(baseUrl + '/delete/:r_no', (req, res) => {
   const { r_no } = req.params
   db.query('DELETE FROM students WHERE r_no = ?', [r_no], (err, result) => {
     if (err) {
@@ -87,7 +88,7 @@ app.delete('/delete/:r_no', (req, res) => {
   })
 })
 
-app.put('/update/:r_no', upload.single('img'), (req, res) => {
+app.put(baseUrl + '/update/:r_no', upload.single('img'), (req, res) => {
   const { r_no } = req.params
   const { name, marks } = req.body
   const img = req.file ? req.file.path : null
@@ -136,7 +137,7 @@ app.put('/update/:r_no', upload.single('img'), (req, res) => {
   })
 })
 
-app.get('/show/:r_no', (req, res) => {
+app.get(baseUrl + '/show/:r_no', (req, res) => {
   const { r_no } = req.params
   const query = 'SELECT * FROM students WHERE r_no = ?'
 
