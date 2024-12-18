@@ -27,9 +27,9 @@ const upload = multer({storage: storage});
 
 const db = mysql.createConnection({
 	host: "localhost",
-	user: "username",
-	password: "password",
-	database: "DB Name",
+	user: "root",
+	password: "abc123",
+	database: "student",
 })
 
 db.connect((err)=>{
